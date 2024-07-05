@@ -198,6 +198,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 }
                 final data = snapshot.data!.docs;
                 return ListView.builder(
+                  reverse: true,
                   itemCount: data.length,
                   itemBuilder: (context, index) {
                     final message = Message.fromJson(data[index]);
