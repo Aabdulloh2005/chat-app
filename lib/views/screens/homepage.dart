@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lesson70/controllers/user_controller.dart';
 import 'package:lesson70/models/user.dart';
-import 'package:lesson70/services/local_notification_service.dart';
 import 'package:lesson70/services/user_auth.service.dart';
 import 'package:lesson70/views/screens/chat_screen.dart';
 import 'package:lesson70/views/screens/profile_screen.dart';
@@ -21,7 +20,8 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat"),
+        centerTitle: true,
+        title: const Text("Chat"),
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).push(
@@ -34,13 +34,14 @@ class _HomepageState extends State<Homepage> {
         ),
         actions: [
           IconButton(
-              onPressed: () {
-                UserAuthService().signOut();
-              },
-              icon: const Icon(
-                Icons.exit_to_app,
-                color: Colors.red,
-              ))
+            onPressed: () {
+              UserAuthService().signOut();
+            },
+            icon: const Icon(
+              Icons.exit_to_app,
+              color: Colors.red,
+            ),
+          ),
         ],
       ),
       body: StreamBuilder(
@@ -92,11 +93,12 @@ class _HomepageState extends State<Homepage> {
                             },
                             child: ListTile(
                               leading: CircleAvatar(
-                                // onBackgroundImageError: (exception, stackTrace) {
-                                //   const Icon(Icons.person);
-                                // },
                                 radius: 30,
-                                backgroundImage: NetworkImage(user.photoUrl),
+                                backgroundImage:
+                                    user.photoUrl.startsWith("https")
+                                        ? NetworkImage(user.photoUrl)
+                                        : const AssetImage(
+                                            "assets/images/person.png"),
                               ),
                               title: Text(user.userName),
                             ),

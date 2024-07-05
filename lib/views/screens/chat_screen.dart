@@ -137,6 +137,8 @@ import 'package:lesson70/models/message.dart';
 import 'package:lesson70/models/user.dart';
 import 'dart:io';
 
+import 'package:lesson70/services/firebase_notification_service.dart';
+
 class ChatScreen extends StatefulWidget {
   User1 user;
 
@@ -158,6 +160,8 @@ class _ChatScreenState extends State<ChatScreen> {
     if (_messageController.text.isNotEmpty) {
       chatcontroller.sendMessage(
           widget.user.id, _messageController.text, widget.user.userName);
+      FirebasePushNotificationService.sendNotificationMessage(
+          widget.user.token, widget.user.userName, _messageController.text);
       _messageController.clear();
     }
   }
@@ -168,8 +172,10 @@ class _ChatScreenState extends State<ChatScreen> {
 
     if (pickedFile != null) {
       final imageFile = File(pickedFile.path);
-      chatcontroller.sendImageMessage(
+      final image = await chatcontroller.sendImageMessage(
           widget.user.id, imageFile, widget.user.userName);
+      FirebasePushNotificationService.sendNotificationImage(
+          widget.user.token, widget.user.userName, image);
     }
   }
 

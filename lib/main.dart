@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lesson70/firebase_options.dart';
-import 'package:lesson70/services/local_notification_service.dart';
+import 'package:lesson70/services/firebase_notification_service.dart';
 import 'package:lesson70/views/screens/homepage.dart';
 import 'package:lesson70/views/screens/sign_in_screen.dart';
 
@@ -11,7 +11,8 @@ void main(List<String> args) async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await LocalNotificationService.init();
+  await FirebasePushNotificationService.init();
+  // await LocalNotificationService.init();
   runApp(const MainRunner());
 }
 
@@ -32,7 +33,7 @@ class MainRunner extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-          return snapshot.hasData ? Homepage() : const SignInScreen();
+          return snapshot.hasData ? const Homepage() : const SignInScreen();
         },
       ),
     );

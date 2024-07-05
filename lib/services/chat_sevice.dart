@@ -85,7 +85,7 @@ class ChatService {
         );
   }
 
-  Future<void> sendImageMessage(
+  Future<String> sendImageMessage(
       String toUserId, File imageFile, String userName) async {
     final currentUserId = _firebaseAuth.currentUser!.uid;
     final timestamp = Timestamp.now();
@@ -119,6 +119,7 @@ class ChatService {
         .add(
           newMessage.toMap(),
         );
+    return imageUrl;
   }
 
   Stream<QuerySnapshot> getMessages(String userId, String otherUserId) {

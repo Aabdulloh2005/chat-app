@@ -23,8 +23,9 @@ class ChatController {
     _chatService.sendMessage(toUserId, message, userName);
   }
 
-  void sendImageMessage(String toUserId, File imageFile, String userName) {
-    _chatService.sendImageMessage(toUserId, imageFile, userName);
+  Future<String> sendImageMessage(
+      String toUserId, File imageFile, String userName) async {
+    return await _chatService.sendImageMessage(toUserId, imageFile, userName);
   }
 
   Stream<QuerySnapshot> getMessages(String userId, String otherUserId) async* {

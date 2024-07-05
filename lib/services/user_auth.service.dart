@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:lesson70/services/firebase_notification_service.dart';
 
 class UserAuthService {
   final _userAuthentication = FirebaseAuth.instance;
@@ -21,11 +22,15 @@ class UserAuthService {
       email: email,
       password: password,
     );
+    
     User? user = userCredential.user;
+    String? userToken = await FirebasePushNotificationService.getToken();
 
     if (user != null) {
       await _userfirebase.collection("users").doc(user.uid).set(
         {
+          // "token": userToken,
+          "token": "qqq",
           "email": user.email,
           "userName": username,
           "photoUrl": "",
