@@ -69,9 +69,9 @@ class _HomepageState extends State<Homepage> {
               : ListView.separated(
                   separatorBuilder: (context, index) {
                     return const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.0),
-                      child: Divider(
-                        height: 10,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15.0,
+                        vertical: 2,
                       ),
                     );
                   },
@@ -79,7 +79,7 @@ class _HomepageState extends State<Homepage> {
                   itemBuilder: (context, index) {
                     final user = User1.fromJson(data[index]);
                     return user.id == FirebaseAuth.instance.currentUser!.uid
-                        ? SizedBox()
+                        ? const SizedBox()
                         : GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(

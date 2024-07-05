@@ -22,6 +22,7 @@ class MainRunner extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
       darkTheme: ThemeData.dark(),
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),

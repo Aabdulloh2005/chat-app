@@ -231,7 +231,17 @@ class _ChatScreenState extends State<ChatScreen> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: message.message.startsWith('http')
-                            ? Image.network(message.message)
+                            ? Container(
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                clipBehavior: Clip.hardEdge,
+                                child: Image.network(
+                                  message.message,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
                             : Text(
                                 message.message,
                                 style: const TextStyle(
